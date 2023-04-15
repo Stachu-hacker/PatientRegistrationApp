@@ -23,5 +23,12 @@ namespace PatientRegistrationApp
         public string[] Appointments { get => appointments; set => appointments = value; }
         public DateTime DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
         public DateTime DateOfDeath { get => dateOfDeath; set => dateOfDeath = value; }
+
+        public string GetPersonalInfo()
+        {
+            return $"Name: {Name}\n" +
+                $"Surname: {Surname}\n" +
+                $"Date of birth {DateOfBirth}";
+        }
     }
 }
