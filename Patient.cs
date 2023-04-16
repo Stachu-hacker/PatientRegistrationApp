@@ -18,6 +18,13 @@ namespace PatientRegistrationApp
             dateOfBirth,
             dateOfDeath;
 
+        public Patient(string name,string surname)
+        {
+            Name = name;
+            Surname = surname;
+            
+        }
+
         public string Name { get => name; set => name = value; }
         public string Surname { get => surname; set => surname = value; }
         public string[] Appointments { get => appointments; set => appointments = value; }
