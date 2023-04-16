@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Menu.cs" />
     <Compile Include="Patient.cs" />
+    <Compile Include="PatientListGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PatientRegistrationApp
 {
-    class Patient
+    public class Patient
     {
         private string
             name,
