@@ -48,7 +48,7 @@ namespace PatientRegistrationApp
                  switch (selectedOption)
                  {
                      //case "Make an appointment":MakeAppointment();break;
-                     //case "Register a patient": Register();break;
+                     case "Register a patient": Register();break;
                      case "Check patient's info": PatientInfo();break;
                      //case "Check appointments": CheckAppointment();break;
                      //case "Delete an appointment": DeleteAppointment();break;
@@ -74,6 +74,18 @@ namespace PatientRegistrationApp
             }
             if(!found) Write("There is no registered patient under that name");
             ReadKey();
+        }
+        static void Register()
+        {
+            Clear();
+            Write("Name: ");
+            string name = ReadLine();
+            Write("\nSurname: ");
+            string surname = ReadLine();
+            Write("\nDate of Birth: ");
+            DateTime dateOfBirth = DateTime.Parse(ReadLine());
+            List<Patient> patientsList = PatientListGenerator.GetRandomizedPatientsList();
+            patientsList.Add(new Patient(name: name, surname: surname, dateOfBirth: dateOfBirth));
         }
        
     }

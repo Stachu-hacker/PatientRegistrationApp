@@ -12,22 +12,23 @@ namespace PatientRegistrationApp
             name,
             surname;
 
-        private string[]
+        private (DateTime,string,string)
             appointments;
         private DateTime
             dateOfBirth,
             dateOfDeath;
 
-        public Patient(string name,string surname)
+        public Patient(string name,string surname, DateTime dateOfBirth)
         {
             Name = name;
             Surname = surname;
+            DateOfBirth = dateOfBirth;
             
         }
 
         public string Name { get => name; set => name = value; }
         public string Surname { get => surname; set => surname = value; }
-        public string[] Appointments { get => appointments; set => appointments = value; }
+        public (DateTime, string, string) Appointments { get => appointments; set => appointments = value; }
         public DateTime DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
         public DateTime DateOfDeath { get => dateOfDeath; set => dateOfDeath = value; }
 
@@ -35,7 +36,7 @@ namespace PatientRegistrationApp
         {
             return $"Name: {Name}\n" +
                 $"Surname: {Surname}\n" +
-                $"Date of birth {DateOfBirth}";
+                $"Date of birth {DateOfBirth.ToString("dd/MM/yyyy")}";
         }
     }
 }
