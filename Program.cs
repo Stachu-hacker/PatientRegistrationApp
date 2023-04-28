@@ -47,15 +47,30 @@ namespace PatientRegistrationApp
                  string selectedOption = menu.SelectedOption;
                  switch (selectedOption)
                  {
-                     //case "Make an appointment":MakeAppointment();break;
+                     case "Make an appointment":MakeAppointment();break;
                      case "Register a patient": Register();break;
                      case "Check patient's info": PatientInfo();break;
-                     //case "Check appointments": CheckAppointment();break;
+                     case "Check appointments": CheckAppointment();break;
                      //case "Delete an appointment": DeleteAppointment();break;
                      case "Exit" : running=false;break;
                  }
 
             }
+        }
+        static Patient FindPatient(string searchedSurname)
+        {
+            List<Patient> patientsList = PatientListGenerator.GetRandomizedPatientsList();
+            bool found = false;
+            foreach (var patient in patientsList)
+            {
+                if (patient.Surname == searchedSurname)
+                {
+                    found = true;
+                    return patient;
+                    
+                }                
+            }
+            return null; ;
         }
         static void PatientInfo()
         {
@@ -63,16 +78,12 @@ namespace PatientRegistrationApp
             Console.Write("Surname: ");
             string searchedSurname = ReadLine();
             List<Patient> patientsList = PatientListGenerator.GetRandomizedPatientsList();
-            bool found = false;
-            foreach (var patient in patientsList)
+            Patient patient = FindPatient(searchedSurname);
+            if (patient != null)
             {
-                if (patient.Surname == searchedSurname)
-                {
-                    WriteLine(patient.GetPersonalInfo()+"\n");
-                    found = true;
-                };
+                WriteLine(patient.GetPersonalInfo() + "\n");
             }
-            if(!found) Write("There is no registered patient under that name");
+            else Write("There is no registered patient under that name");
             ReadKey();
         }
         static void Register()
@@ -86,6 +97,30 @@ namespace PatientRegistrationApp
             DateTime dateOfBirth = DateTime.Parse(ReadLine());
             List<Patient> patientsList = PatientListGenerator.GetRandomizedPatientsList();
             patientsList.Add(new Patient(name: name, surname: surname, dateOfBirth: dateOfBirth));
+            Write("\nPatient registered correctly");
+            ReadKey();
+        }
+        static void MakeAppointment()
+        {
+            Write("Date of the appointment: ");
+            DateTime dateOfAppointment = DateTime.Parse(ReadLine());
+            Write("\nPatient's Surname: ");
+            string surname = ReadLine();
+            Write("\nDoctor's Surname: ");
+            string docSurname = ReadLine();
+            Patient patient = FindPatient(surname);
+            patient.Appointments.Add(new Appointment(dateOfAppointment, surname, docSurname));
+            Write("Appointment created correctly");
+            ReadKey();
+            
+        }
+        static void CheckAppointment()
+        {
+            Write("Surname: ");
+            string searchedSurname = ReadLine();
+            Patient patient = FindPatient(searchedSurname);
+            Write($"{patient.ShowAppointments()}");
+            ReadKey();
         }
        
     }
